@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2b1408">
+<title>味道大冒險｜HK P1 美食島</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=fix11">
+<link rel="icon" href="assets/prince.png" type="image/png">
+</head>
+<body data-screen="home">
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<header id="topbar">
+  <button id="btn-home-top" class="bar-btn" type="button" aria-label="返回主頁">🏠</button>
+  <div class="brand"><span class="brand-badge">美</span><span class="brand-words"><b>味道大冒險</b><small>香港小一 · 廣東話數數</small></span></div>
+  <div class="bar-actions">
+    <span id="mascot-pill"><img src="assets/prince.png" alt="">美食王子</span>
+    <span id="star-total">⭐ 0</span>
+    <button id="btn-sound" class="bar-btn" type="button" aria-label="開關讀出">🔊</button>
+  </div>
+</header>
+
+<main id="app">
+  <section id="screen-home" class="screen active" aria-label="主頁">
+    <div class="home-view">
+      <div class="home-backdrop" aria-hidden="true"></div>
+      <div class="sky-stars" aria-hidden="true"></div>
+      <div class="sky-moon" aria-hidden="true"></div>
+            <!-- meteors spawned by JS -->
+      <div class="sky-isles" aria-hidden="true"><span class="isle i1">🍮</span><span class="isle i2">🍓</span><span class="isle i3">🌈</span><span class="isle-cloud c1">☁️</span><span class="isle-cloud c2">☁️</span><span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span></div>
+      <div class="sky-sea" aria-hidden="true"></div>
+      <div class="home-glow" aria-hidden="true"></div>
+      <div class="floating-symbols" aria-hidden="true">
+        <span>1</span><span>🍮</span><span>🍎</span><span>+</span><span>🍇</span><span>🍉</span><span>🍩</span><span>5</span><span>🍓</span><span>🥛</span><span>7</span><span>🍪</span><span>🧁</span><span>🌈</span>
+      </div>
+      <div class="home-content">
+        <span class="eyebrow">✦ 香港小一 · 廣東話數數冒險</span>
+        <h1 class="game-title"><span class="title-top">味道大冒險</span><span class="title-bottom">美食島</span></h1>
+        <p class="subtitle">從布甸沙漠出發，途經草莓火山、拉麵海洋和彩虹糖雲城，學習數數和比較多少。</p>
+        <div class="home-actions">
+          <button id="btn-start" class="start-adventure"><span class="start-shine"></span><span class="start-icon">▶</span>開始冒險</button>
+          <button id="btn-how" class="how-btn">玩法</button>
+        </div>
+        <div class="home-stats">
+        <div class="rail-head"><span>✦ 選擇島嶼開始 ✦</span></div>
+        <div class="rail">
+          <button type="button" class="arc-card open" onclick="renderMap()"><span class="arc-art a1">🍮</span><span class="arc-name">布甸沙漠</span><span class="arc-skill">數數、序數、分合</span><span class="arc-go">現正開放 ▶</span></button>
+          <button type="button" class="arc-card locked" onclick="renderMap()"><span class="arc-art a2">🍓</span><span class="arc-name">草莓火山</span><span class="arc-skill">加減</span><span class="arc-go">即將開放</span></button>
+          <button type="button" class="arc-card locked" onclick="renderMap()"><span class="arc-art a3">🍜</span><span class="arc-name">拉麵海洋</span><span class="arc-skill">圖形位置</span><span class="arc-go">即將開放</span></button>
+          <button type="button" class="arc-card locked" onclick="renderMap()"><span class="arc-art a4">🌈</span><span class="arc-name">彩虹糖雲城</span><span class="arc-skill">度量生活</span><span class="arc-go">即將開放</span></button>
+        </div>
+      </div>
+      <p class="home-note">按按鈕會讀出聲音，鍵盤 1–4 作答，H 顯示提示，R 重讀題目，Esc 返回地圖。進度會自動儲存在這部裝置。</p>
+      </div>
+      <div class="home-mascot">
+        <div class="mascot-bubble">我是美食王子！跟我來數布甸吧！👑</div>
+        <div class="mascot-face"><img src="assets/prince.png" alt="美食王子全身像"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-map" class="screen" aria-label="冒險地圖">
+    <div class="map-view">
+      <div class="map-header">
+        <button id="btn-home" class="round-back" type="button" aria-label="返回主頁">←</button>
+        <div class="map-heading">
+          <span class="eyebrow">✦ 美食島地圖</span>
+          <h1>選擇關卡</h1>
+          <p>跟隨美食王子從布甸沙漠出發，邊吃邊學。</p>
+        </div>
+        <div class="map-summary"><span class="summary-star">⭐ <span id="map-star-total">0</span> 顆星</span></div>
+      </div>
+      <div id="map-islands"></div>
+      <div class="map-footer"><span>HK P1 · 廣東話 · 味道大冒險</span></div>
+    </div>
+  </section>
+
+  <section id="screen-level" class="screen" aria-label="關卡">
+    <div class="level-view theme-dessert">
+      <div class="level-topbar">
+        <button id="btn-back-map" class="round-back" type="button" aria-label="返回地圖">←</button>
+        <div class="level-progress">
+          <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+          <span id="level-progress" class="progress-label">第 1 / 6 題</span>
+        </div>
+        <button id="btn-hint-top" class="hint-top" type="button">💡 提示</button>
+      </div>
+      <div class="question-stage">
+        <div class="question-card">
+          <div class="question-meta"><span id="level-title" class="meta-chip">🍮 沙丘點點數</span><span class="meta-chip soft">廣東話讀題</span></div>
+          <div class="prompt-row">
+            <p id="speech-text-proxy" class="question-prompt">王子：準備好了嗎？</p>
+            <button id="btn-repeat" class="icon-btn" type="button" aria-label="重讀題目">🔊</button>
+          </div>
+          <div id="mascot-speech" class="speech" hidden><span id="mascot-face">🤴</span><span id="speech-text"></span></div>
+          <div class="visual-zone"><div id="visual" class="visual"></div></div>
+          <div id="options" class="answer-grid"></div>
+          <div class="hint-box" id="hint-box" hidden><span class="hint-icon">💡</span><p id="hint-text"></p></div>
+          <div id="feedback" class="feedback"></div>
+        </div>
+        <div class="buddy"><div class="buddy-bubble" id="buddy-bubble">加油！</div><div class="buddy-face" id="buddy-face"><img src="assets/prince.png" alt="美食王子"></div></div>
+      </div>
+      <div id="level-foot" class="level-foot">
+        <button id="btn-hint" class="small-btn" type="button">💡 提示 (H)</button>
+        <button id="btn-repeat-2" class="small-btn" type="button">🔁 重讀 (R)</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="how-overlay" class="how-overlay" hidden>
+  <div class="how-card">
+    <button id="btn-how-close" class="round-back" type="button">✕</button>
+    <h2>玩法</h2>
+    <ul class="how-list">
+      <li><span>👆</span><div><strong>選擇答案</strong><br>每題 4 個選項，亦可按鍵盤 1–4。</div></li>
+      <li><span>🔊</span><div><strong>聽王子讀題</strong><br>R 重讀，H 查看提示，Esc 返回地圖。</div></li>
+      <li><span>⭐</span><div><strong>取得三星</strong><br>全部答對得 3 星，錯 1–2 次得 2 星，否則得 1 星。進度會自動儲存。</div></li>
+    </ul>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="js/state.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/visuals.js"></script>
+<script src="js/levels/island1.js"></script>
+<script src="js/levels/index.js"></script>
+<script src="js/map.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/main2.js"></script>
+</body>
+</html>
